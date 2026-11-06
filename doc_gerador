@@ -1,0 +1,515 @@
+# DOCUMENTAÇÃO DO GERADOR DE RESIDENTES
+## Simulação de sociedade — Sistema de criação de indivíduos
+
+**Versão:** 1.0  
+**Categoria:** Geração procedural, identidade, personalidade e características individuais.
+
+---
+
+# 1. VISÃO GERAL
+
+O Gerador de Residentes será responsável pela criação de indivíduos que compõem a população da vila.
+
+Cada residente deverá ser criado como uma entidade independente, possuindo identidade própria, características físicas, personalidade, atributos individuais, condições biológicas, preferências, histórico e predisposições comportamentais.
+
+O sistema deverá permitir tanto a geração automática de indivíduos quanto a criação personalizada pelo usuário.
+
+O objetivo é produzir uma população diversificada, evitando residentes excessivamente semelhantes ou combinações de características pouco coerentes.
+
+A geração deverá utilizar procedimentos aleatórios controlados por regras e distribuições de probabilidade. Não haverá utilização de IA generativa.
+
+# 2. MODOS DE GERAÇÃO
+
+O sistema deverá oferecer dois modos principais.
+
+## 2.1. Geração aleatória
+
+O sistema cria um residente automaticamente, determinando suas características por meio de sorteios e regras de distribuição.
+
+O usuário poderá definir apenas parâmetros gerais, deixando o restante sob responsabilidade do gerador.
+
+Exemplos de parâmetros gerais:
+
+Quantidade de residentes.
+
+Faixa etária.
+
+Distribuição de sexos.
+
+Distribuição de tipos MBTI.
+
+Diversidade de personalidades.
+
+Condições físicas gerais.
+
+Distribuição de características sociais.
+
+O sistema deverá produzir indivíduos diferentes entre si.
+
+A aleatoriedade não deverá significar que todos os atributos tenham a mesma probabilidade de receber qualquer valor.
+
+Os atributos deverão utilizar distribuições apropriadas para produzir uma população plausível.
+
+Por exemplo, valores extremamente baixos ou elevados de determinados traços poderão ser menos frequentes do que valores intermediários.
+
+## 2.2. Geração personalizada
+
+O usuário poderá definir manualmente características específicas do residente.
+
+Os atributos não configurados serão preenchidos automaticamente pelo gerador.
+
+O sistema deverá permitir definir:
+
+Nome.
+
+Idade.
+
+Sexo.
+
+Aparência.
+
+Tipo MBTI.
+
+Atributos de personalidade.
+
+Características emocionais.
+
+Características sociais.
+
+Motivações.
+
+Características românticas.
+
+Características cognitivas.
+
+Características morais.
+
+Características físicas.
+
+Características biológicas.
+
+Preferências individuais.
+
+Histórico inicial.
+
+Relacionamentos iniciais.
+
+O usuário não precisará preencher todos os campos. Qualquer atributo deixado em automático será determinado pelo gerador.
+
+## 2.3. Geração híbrida
+
+O sistema também poderá oferecer uma modalidade intermediária.
+
+O usuário define algumas características gerais e permite que o gerador complete o indivíduo.
+
+Exemplo:
+
+O usuário determina que deseja criar um residente INTJ, ambicioso, introvertido e intelectualmente habilidoso.
+
+O gerador determina os demais atributos, buscando produzir uma personalidade coerente com as características definidas.
+
+Essa modalidade deverá ser a mais flexível para criação de personagens específicos.
+
+# 3. IDENTIDADE DO RESIDENTE
+
+Cada indivíduo receberá informações de identificação.
+
+**Identificador único:** código interno que diferencia o residente de todos os outros.
+
+**Nome:** nome próprio.
+
+**Sobrenome:** identificação familiar.
+
+**Idade:** idade inicial.
+
+**Sexo:** característica biológica utilizada pelos sistemas pertinentes.
+
+**Aparência:** características visuais do personagem.
+
+**Origem:** local de nascimento ou procedência.
+
+**Família:** identificação de parentes conhecidos.
+
+**Data de nascimento:** utilizada para acompanhar envelhecimento e acontecimentos da vida.
+
+O identificador único deverá permanecer inalterado durante toda a existência do residente.
+
+# 4. GERAÇÃO DA PERSONALIDADE
+
+A personalidade será construída utilizando o sistema MBTI e os atributos individuais definidos na documentação de personalidade.
+
+## 4.1. Determinação do MBTI
+
+O gerador poderá sortear um dos 16 tipos de personalidade ou receber um tipo previamente definido pelo usuário.
+
+A distribuição poderá ser configurável.
+
+O sistema não deverá obrigar uma distribuição perfeitamente uniforme dos 16 tipos.
+
+Cada residente receberá um tipo MBTI que funcionará como modificador das tendências comportamentais.
+
+## 4.2. Geração dos atributos individuais
+
+Os atributos serão determinados individualmente, utilizando uma escala de 0 a 100.
+
+O gerador deverá considerar:
+
+Tipo MBTI.
+
+Distribuição estatística do atributo.
+
+Características relacionadas.
+
+Parâmetros definidos pelo usuário.
+
+Possíveis correlações comportamentais.
+
+Exemplo:
+
+Um residente ENFP poderá apresentar maior predisposição a curiosidade, espontaneidade e sociabilidade.
+
+Entretanto, o gerador poderá produzir um ENFP reservado, inseguro ou pouco assertivo.
+
+O MBTI deverá influenciar as probabilidades, não estabelecer valores obrigatórios.
+
+## 4.3. Correlação entre atributos
+
+Alguns atributos apresentam relações conceituais e poderão ser correlacionados durante a geração.
+
+Exemplos:
+
+Alta impulsividade poderá estar associada a menor prudência.
+
+Alta empatia poderá estar associada a maior sensibilidade interpessoal.
+
+Alta assertividade poderá aumentar a probabilidade de dominância.
+
+Alta sensibilidade à rejeição poderá estar associada a maior insegurança.
+
+Entretanto, essas correlações não deverão ser obrigatórias.
+
+O gerador deverá preservar combinações individuais incomuns, permitindo residentes contraditórios e interessantes.
+
+Um indivíduo poderá apresentar alta empatia e elevada agressividade, por exemplo.
+
+# 5. GERAÇÃO DAS CARACTERÍSTICAS FÍSICAS
+
+O gerador deverá determinar características físicas individuais.
+
+Exemplos:
+
+Altura.
+
+Peso.
+
+Constituição corporal.
+
+Cor dos olhos.
+
+Cor dos cabelos.
+
+Tipo de cabelo.
+
+Tom de pele.
+
+Características faciais.
+
+Aparência geral.
+
+Força.
+
+Resistência.
+
+Agilidade.
+
+A geração deverá considerar idade, sexo biológico, hereditariedade e características populacionais, conforme o contexto do mundo.
+
+As características físicas deverão apresentar alguma coerência entre si.
+
+Por exemplo, peso e altura poderão influenciar a constituição corporal.
+
+A aparência não deverá ser completamente independente dos atributos físicos.
+
+# 6. GERAÇÃO BIOLÓGICA
+
+O gerador deverá determinar características biológicas.
+
+Exemplos:
+
+Saúde inicial.
+
+Fertilidade.
+
+Longevidade estimada.
+
+Metabolismo.
+
+Imunidade.
+
+Condição física.
+
+Predisposição a determinadas doenças, caso esse sistema seja implementado.
+
+Esses parâmetros poderão influenciar o envelhecimento, a reprodução e a sobrevivência.
+
+A longevidade estimada não deverá determinar uma data exata de morte. Será um parâmetro probabilístico.
+
+# 7. GERAÇÃO DAS MOTIVAÇÕES E PREFERÊNCIAS
+
+Cada residente deverá possuir preferências e interesses individuais.
+
+O gerador poderá determinar:
+
+Preferências profissionais.
+
+Interesses recreativos.
+
+Preferências sociais.
+
+Interesses intelectuais.
+
+Preferências românticas.
+
+Desejo de constituir família.
+
+Interesses econômicos.
+
+Preferências de convivência.
+
+Essas características influenciarão a escolha de atividades e objetivos.
+
+Dois residentes com a mesma profissão poderão apresentar interesses completamente diferentes.
+
+# 8. GERAÇÃO DO HISTÓRICO
+
+Os residentes poderão ser criados com um histórico inicial.
+
+Esse histórico deverá ser especialmente importante quando a vila começar com uma população já adulta.
+
+Exemplos de informações:
+
+Local de nascimento.
+
+Composição familiar.
+
+Experiências anteriores.
+
+Profissões anteriores.
+
+Relacionamentos passados.
+
+Experiências positivas.
+
+Experiências negativas.
+
+Acontecimentos marcantes.
+
+O histórico poderá influenciar memórias, comportamentos e relacionamentos iniciais.
+
+Para evitar complexidade excessiva na primeira implementação, a geração de históricos detalhados poderá ser opcional.
+
+# 9. GERAÇÃO DE RELACIONAMENTOS INICIAIS
+
+O gerador poderá criar relações pré-existentes entre residentes.
+
+Exemplos:
+
+Familiares.
+
+Irmãos.
+
+Pais e filhos.
+
+Cônjuges.
+
+Amigos antigos.
+
+Conhecidos.
+
+Rivais.
+
+Inimigos.
+
+Esses relacionamentos deverão possuir parâmetros individuais, seguindo o sistema de relacionamentos.
+
+A geração deverá respeitar coerência de idade e parentesco.
+
+Por exemplo, um residente de 20 anos não deverá ser gerado como pai de outro residente de 25 anos.
+
+Relacionamentos românticos deverão respeitar as preferências, a idade e as condições individuais dos envolvidos.
+
+O gerador também poderá criar residentes sem relações prévias, especialmente quando a vila for povoada por indivíduos recém-chegados.
+
+# 10. CONTROLE DE DIVERSIDADE POPULACIONAL
+
+O gerador deverá evitar a criação de populações excessivamente homogêneas.
+
+A diversidade deverá considerar:
+
+Distribuição de MBTI.
+
+Variação de atributos individuais.
+
+Distribuição etária.
+
+Distribuição de características físicas.
+
+Diversidade de motivações.
+
+Diversidade de profissões.
+
+Diversidade de preferências.
+
+Diversidade de condições biológicas.
+
+O usuário poderá configurar a intensidade da diversidade.
+
+Uma população poderá apresentar características relativamente semelhantes por razões culturais, familiares ou geográficas, sem que todos os residentes sejam cópias uns dos outros.
+
+# 11. CONTROLE DE COERÊNCIA
+
+O gerador deverá verificar se os indivíduos criados respeitam as condições básicas da simulação.
+
+Exemplos:
+
+Idade compatível com acontecimentos do histórico.
+
+Condições biológicas compatíveis com a reprodução.
+
+Parentescos compatíveis com as idades.
+
+Relacionamentos compatíveis com preferências individuais.
+
+Características físicas dentro dos limites definidos pelo mundo.
+
+Profissões compatíveis com idade e habilidades, quando aplicável.
+
+A coerência deverá funcionar como uma camada de validação, não como uma restrição absoluta à diversidade.
+
+# 12. PERSONALIZAÇÃO E INTERFACE
+
+A interface do gerador deverá apresentar os seguintes recursos:
+
+**Modo de geração:** aleatório, personalizado ou híbrido.
+
+**Identidade:** campos para nome, idade, sexo e origem.
+
+**Personalidade:** seleção do MBTI e ajuste dos atributos individuais.
+
+**Características físicas:** personalização da aparência.
+
+**Biologia:** configuração de parâmetros biológicos.
+
+**Preferências:** interesses, motivações e características românticas.
+
+**Histórico:** configuração de experiências anteriores.
+
+**Relacionamentos:** criação de vínculos iniciais com residentes existentes.
+
+**Aleatorização seletiva:** possibilidade de sortear novamente apenas determinadas categorias.
+
+O usuário deverá conseguir alterar um atributo sem precisar regenerar todo o indivíduo.
+
+# 13. SISTEMA DE REGENERAÇÃO SELETIVA
+
+Um recurso importante será a possibilidade de regenerar partes específicas de um residente.
+
+Exemplo:
+
+O usuário cria um residente com MBTI INTP e aparência definida.
+
+Não gosta dos atributos emocionais gerados.
+
+Poderá regenerar somente os atributos emocionais, preservando todas as outras características.
+
+O mesmo princípio deverá funcionar para aparência, personalidade, preferências, histórico e demais categorias.
+
+Os atributos definidos manualmente pelo usuário deverão permanecer protegidos contra alterações durante a regeneração automática, salvo quando o usuário solicitar o contrário.
+
+# 14. HEREDITARIEDADE E GERAÇÃO DE DESCENDENTES
+
+A geração de novos residentes por reprodução deverá utilizar informações genéticas simplificadas dos pais.
+
+Os descendentes poderão herdar características físicas e biológicas.
+
+Exemplos:
+
+Altura.
+
+Constituição física.
+
+Cor dos olhos.
+
+Características capilares.
+
+Predisposições biológicas.
+
+Fertilidade.
+
+Longevidade estimada.
+
+A herança deverá combinar características dos dois progenitores e incluir variações aleatórias controladas.
+
+A personalidade também poderá apresentar influências familiares, mas não deverá ser determinada geneticamente de maneira rígida.
+
+O MBTI dos descendentes deverá ser determinado por um novo processo de geração, com possibilidade de influência probabilística de predisposições familiares.
+
+Experiências de infância, educação, ambiente familiar e acontecimentos pessoais também deverão influenciar o desenvolvimento comportamental.
+
+# 15. SALVAMENTO E IDENTIFICAÇÃO
+
+Cada residente gerado deverá possuir um registro individual persistente.
+
+O registro deverá armazenar:
+
+Identidade.
+
+MBTI.
+
+Atributos permanentes.
+
+Características físicas.
+
+Características biológicas.
+
+Preferências.
+
+Histórico.
+
+Relacionamentos.
+
+Estados atuais.
+
+Objetivos.
+
+Memórias.
+
+O identificador único deverá garantir que o sistema consiga reconhecer o mesmo residente ao longo de toda a simulação.
+
+A geração de novos residentes não poderá sobrescrever os dados de indivíduos existentes.
+
+# 16. PRINCÍPIOS FUNDAMENTAIS
+
+O gerador deverá produzir indivíduos distintos e não simples variações de um modelo único.
+
+O MBTI deverá influenciar tendências, sem determinar obrigatoriamente os atributos.
+
+Os atributos deverão possuir distribuições configuráveis.
+
+O usuário deverá poder definir características específicas e deixar outras em geração automática.
+
+A aleatoriedade deverá respeitar limites e regras de coerência.
+
+A diversidade deverá ser preservada.
+
+A geração de descendentes deverá considerar hereditariedade e variação individual.
+
+A regeneração seletiva deverá permitir modificar partes de um residente sem perder características previamente definidas.
+
+# 17. PRINCÍPIO CENTRAL
+
+O Gerador de Residentes deverá criar indivíduos que pareçam pertencer a uma população real, com diferenças de personalidade, aparência, capacidades, interesses, experiências e condições biológicas.
+
+Cada residente deverá começar sua existência com uma identidade própria, mas sua trajetória posterior será construída pela interação entre suas características, suas experiências e o ambiente da vila.
+
+**O gerador cria a individualidade inicial; a simulação desenvolve a história de cada indivíduo.**

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matrix — Simulação de Vila</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">SIMULAÇÃO SOCIAL AUTÔNOMA</div>
+      <h1>Matrix <span>Village</span></h1>
+    </div>
+    <div class="clock-panel">
+      <div id="dateLabel">Dia 1 · Primavera</div>
+      <strong id="timeLabel">08:00</strong>
+      <div class="clock-actions">
+        <button id="playButton" class="primary">Iniciar</button>
+        <button id="stepButton">+ 1 hora</button>
+        <select id="speedSelect" aria-label="Velocidade">
+          <option value="1">1×</option><option value="2">2×</option><option value="4">4×</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-layout">
+    <section class="main-column">
+      <div class="section-heading">
+        <div><div class="eyebrow">VISÃO GERAL</div><h2>A vila</h2></div>
+        <div class="population"><strong id="populationCount">30</strong><span>habitantes</span></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><span>Bem-estar médio</span><strong id="wellbeingStat">—</strong></div>
+        <div class="stat-card"><span>Relações positivas</span><strong id="relationStat">—</strong></div>
+        <div class="stat-card"><span>Eventos hoje</span><strong id="eventStat">0</strong></div>
+      </div>
+      <div class="village-board">
+        <div class="board-header"><span>MAPA SOCIAL</span><span class="legend"><i class="dot green"></i> tranquilo <i class="dot amber"></i> tensão <i class="dot red"></i> crítico</span></div>
+        <div id="villageGrid" class="village-grid"></div>
+      </div>
+      <div class="section-heading log-heading">
+        <div><div class="eyebrow">ACONTECIMENTOS</div><h2>Registro da vila</h2></div>
+        <button id="clearLogButton" class="subtle">Limpar registro</button>
+      </div>
+      <div id="eventLog" class="event-log"></div>
+    </section>
+
+    <aside class="side-column">
+      <section class="panel">
+        <div class="panel-heading"><div><div class="eyebrow">POPULAÇÃO</div><h2>Habitantes</h2></div><button id="randomizeButton" title="Gerar nova população">↻</button></div>
+        <input id="residentSearch" class="search" type="search" placeholder="Buscar habitante...">
+        <div id="residentList" class="resident-list"></div>
+      </section>
+
+      <section class="panel detail-panel">
+        <div class="eyebrow">FICHA INDIVIDUAL</div>
+        <div id="residentDetail" class="empty-detail">Selecione um habitante para consultar sua personalidade, estado e relações.</div>
+      </section>
+    </aside>
+  </main>
+
+  <footer>Protótipo local · Simulação determinística por regras e utilidade · Sem IA generativa</footer>
+  <script src="js/data.js"></script>
+  <script src="js/simulation.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
