@@ -1,0 +1,557 @@
+# DOCUMENTAÇÃO DO SISTEMA DE PERSONALIDADE E ATRIBUTOS
+## Simulação de sociedade — Sistema de residentes
+
+**Versão:** 1.0  
+**Categoria:** Personalidade, psicologia, comportamento e características individuais.
+
+---
+
+# 1. VISÃO GERAL
+
+O sistema de personalidade tem como objetivo proporcionar individualidade aos residentes da simulação. Cada indivíduo deverá apresentar características próprias que influenciem suas decisões, comportamentos, relacionamentos, preferências, reações emocionais e objetivos de vida.
+
+O sistema será composto por três elementos fundamentais: MBTI, atributos individuais e estados dinâmicos.
+
+O MBTI será responsável por estabelecer uma estrutura geral de personalidade, determinando tendências comportamentais. Os atributos individuais complementarão essa estrutura, proporcionando diferenças entre indivíduos que compartilham o mesmo tipo de personalidade. Os estados dinâmicos representarão as condições psicológicas e físicas momentâneas de cada residente.
+
+Nenhum desses elementos deverá determinar isoladamente o comportamento de um indivíduo. As decisões serão resultado da combinação entre personalidade, circunstâncias, necessidades, experiências, relacionamentos e condições ambientais.
+
+A simulação não utilizará IA generativa. Toda a inteligência comportamental será implementada por meio de regras, cálculos, sistemas de prioridade, máquinas de estados e algoritmos de decisão.
+
+# 2. SISTEMA MBTI
+
+## 2.1. Conceito
+
+Cada residente receberá um dos 16 tipos de personalidade do MBTI (Myers-Briggs Type Indicator).
+
+O MBTI funcionará como uma camada de tendências comportamentais. Sua função não será determinar exatamente o que um residente fará, mas influenciar suas preferências e probabilidades de comportamento.
+
+Os 16 tipos serão:
+
+ISTJ, ISFJ, INFJ, INTJ, ISTP, ISFP, INFP, INTP, ESTP, ESFP, ENFP, ENTP, ESTJ, ESFJ, ENFJ e ENTJ.
+
+## 2.2. As quatro dimensões
+
+**Extroversão (E) e Introversão (I).**
+
+Determina a tendência de interação com o ambiente social.
+
+Extrovertidos tendem a procurar interações, participar de atividades coletivas e estabelecer novos contatos. Introvertidos tendem a preferir interações mais seletivas, ambientes tranquilos e períodos de isolamento.
+
+Essa dimensão poderá influenciar a frequência de iniciativas sociais, a preferência por atividades coletivas e a maneira como o residente reage a ambientes movimentados.
+
+**Sensação (S) e Intuição (N).**
+
+Determina a preferência por informações concretas ou abstratas.
+
+Indivíduos com preferência por Sensação tendem a valorizar experiências práticas, informações observáveis e procedimentos conhecidos.
+
+Indivíduos com preferência por Intuição tendem a demonstrar maior interesse por possibilidades, abstrações, interpretações e ideias novas.
+
+Essa dimensão poderá influenciar curiosidade, exploração, aprendizagem e preferência por atividades práticas ou criativas.
+
+**Pensamento (T) e Sentimento (F).**
+
+Determina a tendência de avaliação e tomada de decisões.
+
+Indivíduos com preferência por Pensamento tendem a atribuir maior peso à lógica, consistência e análise objetiva.
+
+Indivíduos com preferência por Sentimento tendem a considerar mais intensamente valores pessoais, necessidades emocionais e consequências interpessoais.
+
+Essa dimensão poderá influenciar decisões sociais, resolução de conflitos, julgamentos e prioridades pessoais.
+
+**Julgamento (J) e Percepção (P).**
+
+Determina a preferência por organização ou flexibilidade.
+
+Indivíduos com preferência por Julgamento tendem a valorizar planejamento, previsibilidade, organização e conclusão de tarefas.
+
+Indivíduos com preferência por Percepção tendem a demonstrar maior flexibilidade, espontaneidade e abertura para mudanças.
+
+Essa dimensão poderá influenciar planejamento, cumprimento de rotinas, improvisação e reação a acontecimentos inesperados.
+
+## 2.3. Aplicação comportamental
+
+O MBTI deverá funcionar como modificador de tendências, e não como um conjunto de regras absolutas.
+
+Por exemplo, um residente ENTJ poderá apresentar maior predisposição à liderança, assertividade, organização e competição. Entretanto, seus atributos individuais poderão torná-lo inseguro, generoso, impaciente ou pouco sociável.
+
+Da mesma maneira, dois residentes INFP poderão apresentar comportamentos bastante diferentes dependendo de suas características individuais.
+
+O MBTI não deverá determinar automaticamente profissões, relacionamentos, valores morais, orientação sexual ou capacidade intelectual.
+
+# 3. ATRIBUTOS INDIVIDUAIS PERMANENTES
+
+Os atributos permanentes representam características relativamente estáveis de cada residente.
+
+Serão armazenados individualmente e utilizados pelo sistema comportamental para calcular tendências, preferências e probabilidades de decisão.
+
+Os valores serão representados preferencialmente por uma escala numérica de 0 a 100.
+
+## 3.1. Personalidade e temperamento
+
+Representam tendências gerais de comportamento.
+
+**Introversão:** preferência por ambientes tranquilos, atividades solitárias e interações seletivas.
+
+**Extroversão:** preferência por ambientes movimentados e interações frequentes.
+
+**Sociabilidade:** facilidade e disposição para estabelecer contatos sociais.
+
+**Assertividade:** capacidade e disposição para expressar opiniões e defender interesses.
+
+**Dominância:** desejo de exercer influência, autoridade ou controle.
+
+**Submissividade:** tendência a aceitar autoridade e ceder em determinadas situações.
+
+**Impulsividade:** tendência a agir sem avaliar completamente as consequências.
+
+**Paciência:** tolerância a atrasos, dificuldades e frustrações.
+
+**Prudência:** tendência a avaliar riscos antes de agir.
+
+**Adaptabilidade:** facilidade para lidar com mudanças.
+
+**Curiosidade:** interesse por novidades, informações e descobertas.
+
+**Conservadorismo:** preferência por tradições, costumes e estabilidade.
+
+**Perfeccionismo:** exigência elevada em relação à qualidade das próprias atividades.
+
+**Independência:** preferência por tomar decisões sem depender de outras pessoas.
+
+**Competitividade:** desejo de superar outras pessoas.
+
+**Flexibilidade:** disposição para reconsiderar opiniões e modificar comportamentos.
+
+## 3.2. Características emocionais
+
+Representam a maneira como o residente experimenta e administra emoções.
+
+**Empatia:** capacidade de compreender sentimentos e perspectivas alheias.
+
+**Sensibilidade emocional:** intensidade das reações diante de acontecimentos emocionais.
+
+**Neuroticismo:** tendência à instabilidade emocional e à experiência frequente de emoções negativas.
+
+**Resiliência:** capacidade de recuperação após experiências adversas.
+
+**Autoconfiança:** segurança nas próprias capacidades.
+
+**Autoestima:** avaliação pessoal do próprio valor.
+
+**Insegurança:** tendência a duvidar das próprias capacidades e decisões.
+
+**Otimismo:** tendência a esperar resultados positivos.
+
+**Pessimismo:** tendência a antecipar resultados negativos.
+
+**Irritabilidade:** facilidade para experimentar raiva ou impaciência.
+
+**Melancolia:** predisposição a estados emocionais tristes.
+
+**Serenidade:** tendência a manter a calma diante de situações difíceis.
+
+**Ciúme:** tendência a reagir diante de possíveis ameaças a vínculos afetivos.
+
+**Sensibilidade à rejeição:** intensidade das reações diante de exclusão ou desaprovação.
+
+**Controle emocional:** capacidade de regular emoções e impulsos.
+
+**Ressentimento:** tendência a conservar mágoas e sentimentos negativos após conflitos.
+
+## 3.3. Características sociais
+
+Influenciam a maneira como o residente interage com outras pessoas.
+
+**Carisma:** facilidade para atrair atenção e despertar interesse.
+
+**Eloquência:** capacidade de se expressar verbalmente.
+
+**Diplomacia:** habilidade para administrar divergências sem intensificar conflitos.
+
+**Generosidade:** disposição para compartilhar recursos e benefícios.
+
+**Altruísmo:** disposição para ajudar outras pessoas mesmo sem recompensa direta.
+
+**Lealdade:** tendência a permanecer fiel a pessoas e compromissos.
+
+**Honestidade:** tendência a comunicar informações verdadeiras.
+
+**Confiabilidade:** probabilidade de cumprir promessas e obrigações.
+
+**Manipulação:** disposição para influenciar outras pessoas de maneira estratégica.
+
+**Hostilidade:** predisposição a demonstrar comportamentos agressivos ou antagônicos.
+
+**Cooperação:** disposição para trabalhar em conjunto.
+
+**Tolerância:** capacidade de aceitar diferenças e opiniões divergentes.
+
+**Hospitalidade:** disposição para receber e acolher desconhecidos.
+
+**Fofoca:** tendência a compartilhar informações sobre terceiros.
+
+**Perdão:** facilidade para superar ofensas e retomar relacionamentos.
+
+**Territorialidade:** necessidade de proteger espaços, propriedades e recursos pessoais.
+
+## 3.4. Motivações e ambições
+
+Representam aquilo que o residente valoriza e deseja alcançar durante a vida.
+
+**Ambição:** desejo de alcançar posições ou realizações importantes.
+
+**Busca por riqueza:** importância atribuída à acumulação de dinheiro e propriedades.
+
+**Busca por poder:** desejo de autoridade e influência.
+
+**Busca por reconhecimento:** necessidade de prestígio e aprovação social.
+
+**Busca por conhecimento:** interesse em aprender e adquirir informações.
+
+**Busca por aventura:** desejo de experiências novas e situações estimulantes.
+
+**Necessidade de pertencimento:** importância atribuída à participação em grupos.
+
+**Necessidade de intimidade:** desejo de estabelecer vínculos profundos.
+
+**Desejo de estabilidade:** preferência por segurança e previsibilidade.
+
+**Desejo de liberdade:** preferência por autonomia e ausência de restrições.
+
+**Orientação familiar:** importância atribuída à família e aos parentes.
+
+**Religiosidade:** importância atribuída à fé e às práticas religiosas.
+
+**Interesse coletivo:** importância atribuída ao bem-estar da comunidade.
+
+**Vaidade:** importância atribuída à aparência e à percepção externa.
+
+## 3.5. Características românticas e sexuais
+
+Influenciam a formação de relacionamentos amorosos e a intimidade.
+
+**Libido:** intensidade do desejo sexual.
+
+**Romantismo:** valorização de demonstrações românticas e experiências afetivas.
+
+**Fidelidade:** tendência a respeitar acordos de exclusividade amorosa.
+
+**Sensualidade:** tendência a expressar atração e interesse físico.
+
+**Iniciativa romântica:** disposição para iniciar aproximações amorosas.
+
+**Necessidade de afeto:** importância atribuída a carinho e proximidade emocional.
+
+**Desejo de casamento:** interesse em estabelecer uma união formal.
+
+**Desejo de filhos:** interesse em constituir uma família com descendentes.
+
+**Ciúme romântico:** reatividade diante de possíveis rivais amorosos.
+
+**Comprometimento:** disposição para manter e preservar relacionamentos.
+
+**Seletividade romântica:** grau de exigência na escolha de parceiros.
+
+**Apego emocional:** intensidade dos vínculos afetivos.
+
+A orientação sexual e as preferências individuais de parceiros serão armazenadas separadamente. Não serão determinadas pelo MBTI.
+
+## 3.6. Características cognitivas
+
+Representam capacidades de processamento de informações e aprendizagem.
+
+**Inteligência geral:** capacidade geral de resolver problemas.
+
+**Memória:** capacidade de armazenar e recuperar informações.
+
+**Criatividade:** capacidade de produzir ideias e soluções originais.
+
+**Raciocínio lógico:** capacidade de analisar relações e solucionar problemas estruturados.
+
+**Pensamento abstrato:** facilidade para trabalhar com conceitos e possibilidades.
+
+**Atenção:** capacidade de concentração.
+
+**Discernimento:** capacidade de avaliar situações e consequências.
+
+**Aprendizagem:** facilidade para adquirir conhecimentos e habilidades.
+
+**Planejamento:** capacidade de organizar ações futuras.
+
+**Percepção social:** capacidade de interpretar comportamentos e situações sociais.
+
+**Perspicácia:** capacidade de perceber detalhes e informações implícitas.
+
+**Tomada de decisão:** capacidade de selecionar alternativas adequadas.
+
+## 3.7. Características comportamentais e morais
+
+Influenciam decisões éticas, conflitos e condutas individuais.
+
+**Agressividade:** tendência a utilizar confrontação e comportamentos agressivos.
+
+**Covardia:** tendência a evitar situações percebidas como perigosas.
+
+**Coragem:** disposição para enfrentar riscos e adversidades.
+
+**Crueldade:** disposição para causar sofrimento a outros.
+
+**Moralidade:** importância atribuída a princípios morais pessoais.
+
+**Egoísmo:** tendência a priorizar interesses próprios.
+
+**Senso de justiça:** importância atribuída à equidade e à justiça.
+
+**Vingatividade:** desejo de retaliar ofensas.
+
+**Disciplina:** capacidade de seguir regras e compromissos.
+
+**Obediência:** disposição para seguir autoridades e instruções.
+
+**Desonestidade:** tendência a mentir, trapacear ou enganar.
+
+## 3.8. Características físicas e biológicas
+
+Representam diferenças físicas e condições biológicas individuais.
+
+**Constituição física:** estrutura corporal geral.
+
+**Força:** capacidade de exercer esforço físico.
+
+**Resistência:** capacidade de suportar atividades prolongadas.
+
+**Agilidade:** velocidade e coordenação dos movimentos.
+
+**Saúde:** condição física geral.
+
+**Fertilidade:** capacidade reprodutiva.
+
+**Longevidade:** predisposição biológica relacionada à expectativa de vida.
+
+**Atratividade física:** característica que poderá influenciar a atração de outros residentes.
+
+**Qualidade do sono:** eficiência do descanso.
+
+**Metabolismo:** características relacionadas ao consumo energético.
+
+**Imunidade:** resistência biológica a doenças.
+
+# 4. ESTADOS DINÂMICOS
+
+Diferentemente dos atributos permanentes, os estados dinâmicos representam condições que podem mudar ao longo do tempo.
+
+Eles serão atualizados pela simulação conforme acontecimentos, necessidades, interações e condições ambientais.
+
+## 4.1. Estados emocionais e psicológicos
+
+**Humor:** condição emocional predominante no momento.
+
+**Estresse:** nível de tensão psicológica.
+
+**Felicidade:** satisfação emocional geral.
+
+**Solidão:** percepção de ausência de companhia ou vínculos sociais.
+
+**Medo:** intensidade da percepção de ameaça.
+
+**Frustração:** insatisfação diante de objetivos não alcançados.
+
+**Excitação:** nível de estimulação e entusiasmo.
+
+**Confiança geral:** segurança psicológica diante do ambiente e das circunstâncias.
+
+## 4.2. Necessidades físicas
+
+**Fome:** necessidade de alimentação.
+
+**Sede:** necessidade de hidratação.
+
+**Energia:** disposição física disponível.
+
+**Fadiga:** desgaste acumulado.
+
+**Sono:** necessidade de descanso.
+
+**Saúde atual:** condição física momentânea.
+
+**Higiene:** condição de limpeza pessoal.
+
+## 4.3. Satisfação com a vida
+
+**Satisfação profissional:** avaliação da própria ocupação.
+
+**Satisfação amorosa:** avaliação do relacionamento romântico.
+
+**Satisfação familiar:** avaliação dos vínculos familiares.
+
+**Satisfação social:** avaliação da vida social.
+
+**Satisfação material:** avaliação das condições econômicas e materiais.
+
+**Satisfação geral:** indicador agregado da percepção de qualidade de vida.
+
+Esses indicadores deverão ser influenciados por experiências reais do residente, e não simplesmente atribuídos aleatoriamente.
+
+# 5. SISTEMA DE RELACIONAMENTOS
+
+Cada residente terá relações individuais com os demais habitantes da vila.
+
+Os relacionamentos serão armazenados como informações específicas de cada par de indivíduos.
+
+Por exemplo, Thomas poderá ter grande confiança em Elizabeth, mas pouca confiança em William. Elizabeth também poderá ter opiniões diferentes sobre cada um deles.
+
+## 5.1. Parâmetros de relacionamento
+
+Cada relação poderá conter os seguintes valores:
+
+**Amizade:** proximidade e afeição não romântica.
+
+**Confiança:** segurança depositada na outra pessoa.
+
+**Respeito:** consideração pela personalidade e pelas capacidades do outro.
+
+**Atração física:** interesse físico.
+
+**Atração romântica:** interesse amoroso.
+
+**Hostilidade:** intensidade de sentimentos antagônicos.
+
+**Ressentimento:** mágoas acumuladas.
+
+**Intimidade:** profundidade da conexão pessoal.
+
+**Admiração:** valorização das qualidades do outro.
+
+**Dependência emocional:** necessidade afetiva associada à pessoa.
+
+## 5.2. Categorias de relacionamento
+
+O sistema poderá identificar categorias como desconhecidos, conhecidos, amigos, melhores amigos, apaixonados, namorados, cônjuges, familiares e inimigos.
+
+Essas categorias não substituirão os parâmetros numéricos. Serão interpretações do estado geral da relação.
+
+Uma amizade poderá existir com pouco respeito, assim como uma relação de grande respeito poderá existir sem amizade.
+
+## 5.3. Formação e evolução dos vínculos
+
+As relações serão modificadas pelas interações entre residentes.
+
+Conversas agradáveis poderão aumentar amizade e confiança. Ajuda em situações difíceis poderá aumentar admiração e intimidade. Mentiras poderão reduzir confiança. Traições poderão gerar ressentimento e hostilidade.
+
+Os efeitos dependerão da personalidade dos envolvidos, da gravidade do acontecimento e do histórico da relação.
+
+# 6. MEMÓRIA E EXPERIÊNCIAS
+
+Cada residente deverá possuir um histórico de acontecimentos relevantes.
+
+A memória permitirá que experiências passadas influenciem decisões futuras.
+
+Exemplos de acontecimentos registrados incluem conhecer alguém, iniciar uma amizade, sofrer uma ofensa, receber ajuda, apaixonar-se, casar-se, ter filhos, perder um familiar, enfrentar uma doença ou participar de um conflito.
+
+Os acontecimentos não precisam ser armazenados indefinidamente em detalhes. O sistema poderá manter registros resumidos e atribuir importância aos acontecimentos.
+
+A importância de uma experiência poderá depender de sua intensidade emocional, repetição, relevância pessoal e relação com os objetivos do residente.
+
+Um indivíduo que sofreu uma traição poderá desenvolver desconfiança em relação à pessoa responsável. Um residente que recebeu ajuda repetidamente poderá desenvolver maior confiança e gratidão.
+
+As memórias deverão ser individualizadas. Um mesmo acontecimento poderá ser interpretado de maneiras diferentes pelos envolvidos.
+
+# 7. SISTEMA DE OBJETIVOS E MOTIVAÇÕES
+
+Cada residente poderá possuir objetivos pessoais de curto, médio e longo prazo.
+
+Objetivos de curto prazo incluem alimentar-se, descansar, conversar ou concluir uma tarefa.
+
+Objetivos de médio prazo incluem economizar dinheiro, melhorar habilidades, desenvolver uma amizade ou conquistar uma posição profissional.
+
+Objetivos de longo prazo incluem casar-se, constituir família, adquirir propriedades, alcançar prestígio ou assumir liderança na comunidade.
+
+A personalidade e as motivações individuais influenciarão quais objetivos serão priorizados.
+
+Os objetivos também poderão mudar conforme a idade, as experiências e as circunstâncias.
+
+# 8. FUNCIONAMENTO COMPORTAMENTAL
+
+Os atributos não deverão executar ações diretamente. Eles funcionarão como parâmetros utilizados pelo sistema de decisão.
+
+O sistema poderá utilizar Utility AI, árvores de comportamento e máquinas de estados.
+
+Na abordagem de Utility AI, cada ação possível recebe uma pontuação calculada a partir das circunstâncias e características do residente.
+
+Por exemplo, um residente poderá avaliar simultaneamente as seguintes ações: procurar comida, descansar, trabalhar, conversar com alguém ou procurar entretenimento.
+
+A pontuação de cada ação dependerá de fatores como urgência das necessidades, personalidade, objetivos, disponibilidade de recursos e relações sociais.
+
+A ação com maior prioridade será executada, respeitando eventuais restrições e condições de contexto.
+
+## 8.1. Exemplo de interação
+
+Thomas está com fome e pretende visitar Elizabeth.
+
+A fome aumenta a prioridade de procurar alimento. Entretanto, sua vontade de encontrar Elizabeth também influencia suas decisões.
+
+Se a fome estiver muito elevada, Thomas provavelmente procurará comida primeiro.
+
+Depois de comer, a prioridade poderá mudar e ele poderá procurar Elizabeth.
+
+Se Elizabeth estiver ocupada, Thomas poderá esperar, realizar outra atividade ou procurar companhia em outro lugar.
+
+O comportamento resultará da interação entre necessidades, personalidade, objetivos e ambiente.
+
+# 9. PRINCÍPIOS DE IMPLEMENTAÇÃO
+
+O sistema deverá respeitar algumas regras fundamentais.
+
+O MBTI não deverá determinar comportamentos absolutos. Ele apenas modificará tendências.
+
+Os atributos individuais deverão permitir diferenças significativas entre residentes do mesmo tipo MBTI.
+
+Os estados dinâmicos deverão mudar conforme acontecimentos e circunstâncias.
+
+Os relacionamentos deverão ser individualizados e assimétricos. Thomas poderá gostar muito de Elizabeth sem que Elizabeth necessariamente sinta o mesmo por ele.
+
+As memórias deverão influenciar comportamentos futuros.
+
+As decisões deverão considerar necessidades, objetivos, personalidade, relações e condições ambientais.
+
+O sistema deverá evitar atributos redundantes sempre que possível. Características relacionadas poderão ser combinadas em fórmulas ou utilizadas como fatores complementares.
+
+A simulação deverá produzir comportamentos emergentes a partir das regras implementadas, sem depender de diálogos ou decisões gerados por IA generativa.
+
+# 10. ESTRUTURA GERAL DE UM RESIDENTE
+
+Cada residente deverá possuir um registro individual composto pelas seguintes categorias:
+
+**Identidade:** identificação, nome, idade, sexo, aparência, origem e parentesco.
+
+**MBTI:** tipo de personalidade e suas quatro dimensões.
+
+**Personalidade:** atributos permanentes de temperamento, emoções, características sociais, motivações, características românticas, cognitivas e morais.
+
+**Biologia:** características físicas, saúde, fertilidade e demais parâmetros biológicos.
+
+**Estado atual:** necessidades físicas, estados emocionais e satisfação com a vida.
+
+**Relacionamentos:** parâmetros individuais de relação com os demais residentes.
+
+**Memória:** acontecimentos importantes e experiências pessoais.
+
+**Objetivos:** metas individuais de curto, médio e longo prazo.
+
+**Comportamento:** estado atual, ação em execução, prioridades e decisões recentes.
+
+---
+
+# 11. DIRETRIZ FINAL
+
+O propósito desse sistema é produzir uma população na qual cada residente tenha uma identidade própria e seja capaz de desenvolver uma trajetória de vida particular.
+
+O MBTI estabelecerá tendências gerais de personalidade. Os atributos individuais fornecerão complexidade e diferenciação. Os estados dinâmicos representarão as condições momentâneas. Os relacionamentos e as memórias permitirão que os indivíduos desenvolvam histórias compartilhadas.
+
+A combinação desses sistemas deverá permitir o surgimento espontâneo de amizades, rivalidades, romances, casamentos, conflitos, famílias e mudanças de personalidade comportamental ao longo das gerações.
+
+A prioridade de implementação será construir primeiro os residentes e seus atributos, depois as necessidades e o sistema de decisão, e posteriormente os relacionamentos, as memórias e a reprodução.
+
+**Princípio central: cada residente deve agir de acordo com quem é, o que deseja, o que sente, o que viveu e as circunstâncias em que se encontra.**
