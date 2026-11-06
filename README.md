@@ -28,7 +28,7 @@ Cada par de habitantes possui um registro de relação. Os residentes guardam me
 
 ## Interface
 
-A tela apresenta o mapa social em forma de grade, indicadores agregados da vila, registro de acontecimentos, lista pesquisável de habitantes e ficha individual. Na ficha é possível observar o MBTI, estado atual, amostra dos traços permanentes, objetivos, relações mais relevantes e memórias recentes.
+A tela apresenta uma visão superior da vila em fundo preto, com habitantes representados por pontos brancos. Ao passar o cursor sobre um ponto, aparece o nome, o MBTI, a idade e a atividade atual; clicar seleciona o habitante e abre sua ficha. O mapa mostra uma grade discreta e zonas de referência. Indicadores temporários aparecem junto aos habitantes durante ações como alimentação, sono, trabalho e exploração. Interações sociais são destacadas por linhas entre os envolvidos: ciano para interações amigáveis e vermelho tracejado para conflitos. A tela também contém indicadores agregados, registro de acontecimentos, lista pesquisável de habitantes e ficha individual. Na ficha é possível observar o MBTI, estado atual, amostra dos traços permanentes, objetivos, relações mais relevantes e memórias recentes.
 
 Os controles permitem iniciar ou pausar a simulação, avançar uma hora, alterar a velocidade e gerar uma nova população.
 

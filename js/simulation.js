@@ -25,7 +25,8 @@ class VillageSimulation {
       }
       const r={id:this.nextId++,name,age,sex:Math.random()<.5?"F":"M",mbti,traits,
         state:{hunger:this.rand(15,55),energy:this.rand(45,95),mood:this.rand(45,80),stress:this.rand(5,35),social:this.rand(20,75),health:this.rand(85,100),romance:this.rand(0,35)},
-        action:"idle",location:"Praça",partner:null,memories:[],goals:[],bornDay:1};
+        action:"idle",location:"Praça",partner:null,memories:[],goals:[],bornDay:1,
+        map:{x:0.08+Math.random()*0.84,y:0.10+Math.random()*0.78},visualAction:null};
       this.residents.push(r);
       r.goals=this.makeGoals(r);
     }
@@ -93,6 +94,7 @@ class VillageSimulation {
   }
   performAction(r,action){
     r.action=action;
+    r.visualAction={type:action,until:this.tickCount+1};
     const s=r.state;
     if(action==="eat"){s.hunger=this.clamp(s.hunger-this.rand(28,42));s.mood=this.clamp(s.mood+2);r.location="Refeitório";}
     else if(action==="sleep"){s.energy=this.clamp(s.energy+this.rand(10,16));s.stress=this.clamp(s.stress-3);r.location="Casa";}
@@ -118,12 +120,14 @@ class VillageSimulation {
       a.state.stress=this.clamp(a.state.stress+5);b.state.stress=this.clamp(b.state.stress+5);
       this.addMemory(a,`Teve um conflito com ${b.name}.`,"negative");this.addMemory(b,`Teve um conflito com ${a.name}.`,"negative");
       this.addEvent(`${a.name} e ${b.name} tiveram uma interação hostil.`,"negative");
+      this.lastMapEvent={type:"conflict",a:a.id,b:b.id,at:this.tickCount,until:this.tickCount+3};
     }else{
       const impact=this.rand(2,6)+Math.max(0,friendlyScore/35);
       rel.affinity=this.clamp(rel.affinity+impact,-100,100);rel.trust=this.clamp(rel.trust+impact*.65,-100,100);rel.conflict=this.clamp(rel.conflict-2);
       a.state.social=this.clamp(a.state.social+this.rand(8,15));b.state.social=this.clamp(b.state.social+this.rand(8,15));
       a.state.mood=this.clamp(a.state.mood+2);b.state.mood=this.clamp(b.state.mood+2);
       this.addMemory(a,`Conversou socialmente com ${b.name}.`,"positive");this.addMemory(b,`Interagiu com ${a.name}.`,"positive");
+      this.lastMapEvent={type:"social",a:a.id,b:b.id,at:this.tickCount,until:this.tickCount+3};
       if(rel.interactions===1||rel.interactions%5===0)this.addEvent(`${a.name} e ${b.name} tiveram uma interação amigável.`,"positive");
     }
   }
@@ -145,7 +149,7 @@ class VillageSimulation {
       if(r.age<60&&r.age>=18&&r.partner!==null&&Math.random()<.006&&this.residents.length<80){
         const partner=this.residents.find(x=>x.id===r.partner);
         if(partner&&r.sex==="F"){
-          const child={id:this.nextId++,name:this.pick(DATA.firstNames)+" "+r.name.split(" ").slice(-1)[0],age:0,sex:Math.random()<.5?"F":"M",mbti:this.pick(DATA.mbti),traits:{...r.traits},state:{hunger:20,energy:80,mood:70,stress:5,social:10,health:100,romance:0},action:"idle",location:"Casa",partner:null,memories:[],goals:["Crescer e desenvolver vínculos"],bornDay:this.day};
+          const child={id:this.nextId++,name:this.pick(DATA.firstNames)+" "+r.name.split(" ").slice(-1)[0],age:0,sex:Math.random()<.5?"F":"M",mbti:this.pick(DATA.mbti),traits:{...r.traits},state:{hunger:20,energy:80,mood:70,stress:5,social:10,health:100,romance:0},action:"idle",location:"Casa",partner:null,memories:[],goals:["Crescer e desenvolver vínculos"],bornDay:this.day,map:{x:0.08+Math.random()*0.84,y:0.10+Math.random()*0.78},visualAction:null};
           this.residents.push(child);
           this.addEvent(`${r.name} e ${partner.name} tiveram um filho: ${child.name}.`,"positive");
         }
