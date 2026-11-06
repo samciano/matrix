@@ -1,0 +1,532 @@
+# DOCUMENTAÇÃO DO SISTEMA DE INTERAÇÕES SOCIAIS
+## Simulação de sociedade — Sistema de residentes
+
+**Versão:** 1.0  
+**Categoria:** Interações sociais, comportamento interpessoal e relacionamentos.
+
+---
+
+# 1. VISÃO GERAL
+
+O sistema de interações sociais será responsável por determinar como os residentes se comportam uns diante dos outros.
+
+Não haverá diálogos escritos, conversas em texto ou respostas produzidas por IA generativa.
+
+As interações serão representadas por ações e comportamentos observáveis, como cumprimentar, conversar, abraçar, ajudar, provocar, discutir, ameaçar, agredir, flertar e demonstrar afeto.
+
+Cada interação deverá considerar a personalidade dos envolvidos, seus relacionamentos, estados emocionais, necessidades, memórias, objetivos e circunstâncias ambientais.
+
+O sistema deverá permitir que os residentes iniciem interações espontaneamente, reajam às iniciativas de outros indivíduos e desenvolvam relações ao longo do tempo.
+
+Uma interação não deverá produzir sempre o mesmo resultado. A reação dependerá das características e condições particulares dos envolvidos.
+
+# 2. PRINCÍPIO DE FUNCIONAMENTO
+
+Uma interação social será composta por três elementos fundamentais:
+
+**Iniciativa:** um residente decide procurar outro indivíduo e executar determinada ação.
+
+**Reação:** o destinatário avalia a iniciativa e decide como responder.
+
+**Consequência:** o acontecimento produz alterações nos estados individuais, nos parâmetros de relacionamento e, quando relevante, nas memórias dos envolvidos.
+
+Por exemplo:
+
+Thomas aproxima-se de Elizabeth e tenta iniciar uma conversa amigável.
+
+Elizabeth avalia a situação considerando seu humor, personalidade, relacionamento com Thomas, nível de estresse e disponibilidade.
+
+Se estiver receptiva, poderá corresponder à interação.
+
+Se estiver irritada ou ocupada, poderá responder brevemente, ignorá-lo ou demonstrar hostilidade.
+
+O resultado poderá alterar a amizade, confiança, humor e satisfação social dos envolvidos.
+
+# 3. CATEGORIAS DE INTERAÇÃO
+
+As interações serão organizadas em categorias para facilitar a implementação e a expansão do sistema.
+
+## 3.1. Interações amigáveis
+
+Representam comportamentos positivos e iniciativas de aproximação social.
+
+Exemplos:
+
+- Cumprimentar.
+- Conversar amigavelmente.
+- Sorrir.
+- Acenar.
+- Fazer companhia.
+- Contar uma história por meio de animações e gestos.
+- Brincar.
+- Fazer uma piada.
+- Elogiar.
+- Demonstrar interesse.
+- Oferecer ajuda.
+- Compartilhar alimentos.
+- Presentear.
+- Convidar para uma atividade.
+- Acompanhar alguém durante uma caminhada.
+- Consolar.
+- Abraçar.
+- Demonstrar carinho.
+
+Consequências possíveis:
+
+Aumento de amizade, confiança, intimidade e satisfação social.
+
+Redução de solidão e, dependendo da situação, estresse.
+
+Aumento de admiração ou atração, quando a interação for relevante para esses sentimentos.
+
+## 3.2. Interações neutras
+
+Representam comportamentos sociais sem intenção necessariamente positiva ou negativa.
+
+Exemplos:
+
+- Cumprimentar formalmente.
+- Fazer uma pergunta por gestos.
+- Solicitar informações.
+- Chamar a atenção.
+- Pedir passagem.
+- Solicitar um objeto.
+- Entregar um objeto.
+- Negociar.
+- Conversar sobre atividades cotidianas.
+- Trabalhar em conjunto.
+- Compartilhar um espaço.
+- Observar outra pessoa.
+- Despedir-se.
+
+Consequências possíveis:
+
+Pequenas alterações nos parâmetros de relacionamento, dependendo do contexto.
+
+Essas interações também poderão servir como oportunidades para desenvolver familiaridade entre desconhecidos.
+
+## 3.3. Interações hostis
+
+Representam comportamentos negativos, agressivos ou antagônicos.
+
+Exemplos:
+
+- Ignorar deliberadamente.
+- Demonstrar desprezo.
+- Fazer provocações.
+- Zombar.
+- Insultar por gestos.
+- Repreender.
+- Acusar.
+- Discutir.
+- Gritar.
+- Intimidar.
+- Ameaçar.
+- Empurrar.
+- Agredir fisicamente.
+- Sabotar atividades.
+- Humilhar publicamente.
+- Recusar ajuda deliberadamente.
+
+Consequências possíveis:
+
+Redução de amizade, confiança e respeito.
+
+Aumento de hostilidade, ressentimento, estresse e medo.
+
+Possibilidade de iniciar rivalidades ou conflitos duradouros.
+
+A intensidade das consequências dependerá da gravidade da interação e da personalidade dos envolvidos.
+
+## 3.4. Interações românticas
+
+Representam iniciativas de aproximação amorosa e demonstrações de interesse.
+
+Exemplos:
+
+- Procurar a companhia de alguém por interesse romântico.
+- Flertar.
+- Fazer elogios românticos.
+- Demonstrar interesse físico.
+- Segurar as mãos.
+- Abraçar romanticamente.
+- Beijar.
+- Convidar para um encontro.
+- Oferecer presentes românticos.
+- Demonstrar ciúme.
+- Procurar reconciliação.
+- Propor casamento.
+
+Consequências possíveis:
+
+Alterações na atração romântica, intimidade, confiança e comprometimento.
+
+Possibilidade de iniciar relacionamentos amorosos, fortalecer vínculos existentes ou provocar rejeição e conflitos.
+
+As iniciativas deverão considerar orientação sexual, preferências, idade, disponibilidade romântica, atração e condições individuais.
+
+## 3.5. Interações familiares
+
+Representam comportamentos específicos entre parentes e membros de uma família.
+
+Exemplos:
+
+- Demonstrar carinho aos filhos.
+- Cuidar de crianças.
+- Ensinar habilidades.
+- Consolar familiares.
+- Visitar parentes.
+- Ajudar pais idosos.
+- Disciplinar filhos.
+- Repreender familiares.
+- Demonstrar preocupação.
+- Participar de atividades familiares.
+
+Consequências possíveis:
+
+Alterações nos vínculos familiares, confiança, apego emocional e satisfação familiar.
+
+A frequência dessas interações poderá depender do grau de parentesco, da convivência e da orientação familiar de cada residente.
+
+## 3.6. Interações cooperativas
+
+Representam atividades que envolvem colaboração entre indivíduos.
+
+Exemplos:
+
+- Ajudar em trabalhos.
+- Construir conjuntamente.
+- Coletar recursos.
+- Compartilhar ferramentas.
+- Defender outra pessoa.
+- Participar de atividades coletivas.
+- Cuidar de propriedades.
+- Dividir tarefas.
+- Prestar assistência em situações perigosas.
+
+Consequências possíveis:
+
+Aumento de confiança, respeito, amizade e cooperação.
+
+Essas interações também poderão melhorar a eficiência das atividades realizadas em conjunto.
+
+## 3.7. Interações competitivas
+
+Representam situações nas quais os residentes disputam recursos, reconhecimento ou resultados.
+
+Exemplos:
+
+- Competir em atividades.
+- Disputar propriedades.
+- Disputar posições profissionais.
+- Demonstrar superioridade.
+- Provocar um rival.
+- Desafiar alguém.
+- Disputar a atenção de outra pessoa.
+- Competir por reconhecimento social.
+
+Consequências possíveis:
+
+Aumento de rivalidade, competitividade, admiração ou ressentimento.
+
+Uma competição saudável poderá fortalecer determinados relacionamentos, enquanto disputas agressivas poderão produzir hostilidade.
+
+# 4. PERSONALIDADE E ESCOLHA DAS INTERAÇÕES
+
+A personalidade deverá influenciar quais interações um residente tende a iniciar, como executa essas interações e como reage às iniciativas alheias.
+
+O MBTI funcionará como modificador de tendências.
+
+Os atributos individuais terão influência mais específica sobre as decisões.
+
+Exemplos:
+
+Um residente extrovertido terá maior predisposição a iniciar interações sociais.
+
+Um residente introvertido poderá preferir interações individuais e demonstrar menor iniciativa em grupos.
+
+Um indivíduo empático terá maior tendência a consolar alguém em sofrimento.
+
+Um indivíduo agressivo poderá responder a provocações com hostilidade.
+
+Um indivíduo diplomático poderá tentar resolver conflitos pacificamente.
+
+Um indivíduo manipulador poderá utilizar elogios, presentes ou demonstrações de amizade para obter vantagens.
+
+Um indivíduo impulsivo poderá iniciar confrontos sem avaliar adequadamente as consequências.
+
+Um indivíduo inseguro poderá interpretar determinados comportamentos neutros como rejeição.
+
+Um indivíduo romântico poderá procurar mais frequentemente a companhia de alguém por quem sente atração.
+
+Essas tendências não serão absolutas. As circunstâncias e os estados atuais poderão modificar completamente a decisão.
+
+# 5. INFLUÊNCIA DO ESTADO ATUAL
+
+O estado momentâneo de cada residente deverá ter influência direta nas interações.
+
+A mesma pessoa poderá apresentar comportamentos diferentes dependendo de como está se sentindo.
+
+Exemplos:
+
+**Felicidade elevada:** maior disposição para interações amigáveis, brincadeiras e demonstrações de carinho.
+
+**Estresse elevado:** menor tolerância a provocações, interrupções e situações frustrantes.
+
+**Fome elevada:** menor disposição para interações demoradas e maior prioridade para procurar alimentos.
+
+**Fadiga elevada:** menor iniciativa social e maior tendência a encerrar interações.
+
+**Solidão elevada:** maior probabilidade de procurar companhia.
+
+**Irritabilidade elevada:** maior probabilidade de responder negativamente a situações desagradáveis.
+
+**Medo elevado:** maior probabilidade de evitar indivíduos ameaçadores.
+
+**Tristeza elevada:** maior possibilidade de procurar consolo ou companhia, dependendo da personalidade.
+
+**Confiança elevada em alguém:** maior receptividade a iniciativas dessa pessoa.
+
+**Ressentimento elevado:** maior possibilidade de evitar ou hostilizar a pessoa responsável pela mágoa.
+
+Os estados atuais deverão modificar as probabilidades de escolha e reação, sem necessariamente determinar o resultado.
+
+# 6. SISTEMA DE INICIATIVA
+
+Os residentes deverão avaliar periodicamente se desejam interagir com alguém.
+
+A iniciativa poderá surgir de diferentes motivações:
+
+Necessidade de companhia.
+
+Interesse romântico.
+
+Desejo de resolver conflitos.
+
+Busca por ajuda.
+
+Curiosidade sobre outro indivíduo.
+
+Desejo de compartilhar experiências.
+
+Competição.
+
+Hostilidade.
+
+Necessidade de cooperação.
+
+Interesse em estabelecer novas amizades.
+
+Cada residente deverá avaliar os indivíduos disponíveis nas proximidades.
+
+A escolha de um destinatário poderá considerar:
+
+Proximidade física.
+
+Familiaridade.
+
+Amizade.
+
+Confiança.
+
+Atração.
+
+Histórico de interações.
+
+Compatibilidade comportamental.
+
+Objetivos pessoais.
+
+Necessidades atuais.
+
+Disponibilidade do destinatário.
+
+A probabilidade de iniciar uma interação será calculada a partir desses fatores.
+
+# 7. SISTEMA DE REAÇÃO
+
+Quando um residente receber uma iniciativa social, deverá avaliar como responder.
+
+As possibilidades incluem:
+
+Aceitar.
+
+Corresponder.
+
+Recusar educadamente.
+
+Ignorar.
+
+Demonstrar desinteresse.
+
+Responder de maneira hostil.
+
+Reagir agressivamente.
+
+Fugir ou afastar-se.
+
+Iniciar uma interação diferente.
+
+Por exemplo, um residente poderá tentar conversar amigavelmente com alguém que esteja irritado.
+
+O destinatário poderá aceitar a conversa, responder brevemente ou demonstrar irritação.
+
+A reação deverá considerar a personalidade dos dois indivíduos, a relação existente e o estado momentâneo de ambos.
+
+A resposta também poderá ser influenciada pela situação ambiental. Um residente ocupado trabalhando poderá recusar uma interação mesmo gostando bastante da pessoa que o procurou.
+
+# 8. SISTEMA DE CONSEQUÊNCIAS
+
+Toda interação relevante deverá produzir consequências.
+
+As consequências poderão afetar diferentes sistemas simultaneamente.
+
+**Estados emocionais:** humor, estresse, felicidade, medo, frustração e solidão.
+
+**Relacionamentos:** amizade, confiança, respeito, hostilidade, intimidade e atração.
+
+**Memórias:** registro de acontecimentos importantes.
+
+**Objetivos:** aproximação ou afastamento de objetivos pessoais.
+
+**Comportamento futuro:** mudança nas probabilidades de interações posteriores.
+
+Exemplo:
+
+Thomas faz uma provocação a William.
+
+William possui alta sensibilidade à rejeição, baixa paciência e elevada impulsividade.
+
+Ele reage agressivamente.
+
+Thomas possui alta competitividade e elevada assertividade, respondendo à agressão.
+
+A situação poderá evoluir para uma discussão ou confronto físico.
+
+Ambos acumulam estresse e ressentimento, e a relação passa a apresentar maior hostilidade.
+
+Em outro cenário, William poderia possuir alta serenidade e diplomacia, respondendo de maneira indiferente ou tentando encerrar o conflito.
+
+A mesma iniciativa poderá, portanto, produzir resultados diferentes.
+
+# 9. INTERAÇÕES RECORRENTES E HISTÓRICO
+
+Os residentes deverão reconhecer padrões de relacionamento construídos ao longo do tempo.
+
+Indivíduos que frequentemente interagem de maneira amigável poderão desenvolver familiaridade e amizade.
+
+Indivíduos que frequentemente entram em conflito poderão desenvolver rivalidade.
+
+Um residente que costuma receber ajuda de determinada pessoa poderá passar a procurá-la em situações difíceis.
+
+Um residente que sofreu repetidas provocações poderá começar a evitar o responsável.
+
+O histórico também deverá permitir mudanças de comportamento.
+
+Uma relação inicialmente hostil poderá melhorar após sucessivas interações positivas.
+
+Uma amizade antiga poderá deteriorar-se após uma traição.
+
+# 10. RESTRIÇÕES E CONDIÇÕES
+
+Nem todas as interações estarão disponíveis em todas as circunstâncias.
+
+Cada ação deverá possuir condições específicas.
+
+Exemplos:
+
+Um abraço exige proximidade física e disponibilidade dos envolvidos.
+
+Uma interação romântica exige compatibilidade com as preferências do destinatário e condições adequadas.
+
+Uma conversa exige que os indivíduos estejam suficientemente próximos e disponíveis.
+
+Uma agressão física exige condições de proximidade e capacidade de execução.
+
+Uma interação familiar deverá considerar parentesco e contexto.
+
+Um residente inconsciente ou incapacitado não poderá iniciar interações convencionais.
+
+A simulação deverá considerar também diferenças de idade, limitações físicas, condições de saúde e normas sociais do mundo.
+
+# 11. REPRESENTAÇÃO VISUAL
+
+As interações não utilizarão diálogos em texto.
+
+A comunicação será transmitida por meio de:
+
+Animações corporais.
+
+Expressões faciais.
+
+Gestos.
+
+Movimentação dos personagens.
+
+Proximidade física.
+
+Duração das interações.
+
+Postura corporal.
+
+Reações observáveis.
+
+Exemplos:
+
+Uma interação amigável poderá ser representada por um sorriso, aceno ou conversa gestual.
+
+Uma interação hostil poderá apresentar expressões de irritação, gestos bruscos e afastamento.
+
+Uma interação romântica poderá apresentar aproximação física, olhares, abraços e beijos.
+
+Uma discussão poderá apresentar movimentos corporais mais intensos e expressões de descontentamento.
+
+As animações deverão ser selecionadas conforme o tipo e a intensidade da interação.
+
+# 12. DIRETRIZES DE IMPLEMENTAÇÃO
+
+O sistema deverá ser modular e permitir a inclusão de novas interações sem exigir alterações profundas na arquitetura.
+
+Cada interação deverá possuir uma definição própria, contendo:
+
+Identificador da interação.
+
+Categoria.
+
+Condições necessárias.
+
+Distância máxima.
+
+Duração.
+
+Requisitos de personalidade ou motivação, quando aplicáveis.
+
+Fatores que influenciam a iniciativa.
+
+Fatores que influenciam a aceitação.
+
+Possíveis reações.
+
+Consequências emocionais.
+
+Consequências relacionais.
+
+Possibilidade de gerar memória.
+
+Animação correspondente.
+
+O sistema de decisão deverá selecionar interações considerando a Utility AI e as condições de contexto.
+
+Deverá existir também um mecanismo para evitar repetição excessiva de uma mesma interação entre os mesmos residentes.
+
+Interações em andamento deverão possuir duração e condições de interrupção.
+
+# 13. PRINCÍPIO CENTRAL
+
+O sistema deverá produzir uma sociedade na qual os residentes não apenas compartilham o mesmo ambiente, mas estabelecem relações por meio de comportamentos observáveis.
+
+Cada indivíduo deverá interagir de maneira coerente com sua personalidade, seus sentimentos, suas necessidades, suas experiências e suas relações.
+
+Não haverá necessidade de diálogos escritos para que a população desenvolva uma vida social complexa.
+
+**A identidade de cada residente deverá ser percebida pela maneira como ele age diante dos outros, e não por textos que descrevem sua personalidade.**
