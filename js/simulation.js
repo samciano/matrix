@@ -1,162 +1,78 @@
-/* Núcleo da simulação: estados, relações, memória e decisões por utilidade. */
-class VillageSimulation {
-  constructor(size=30) {
-    this.day=1; this.hour=8; this.minute=0; this.season="Primavera"; this.tickCount=0;
-    this.residents=[]; this.relations={}; this.events=[]; this.dailyEvents=0; this.nextId=1;
-    this.running=false; this.generatePopulation(size);
-    this.addEvent("A vila foi fundada. Os habitantes começam suas rotinas.", "system");
-  }
-  rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
-  pick(a){return a[Math.floor(Math.random()*a.length)]}
-  clamp(v,min=0,max=100){return Math.max(min,Math.min(max,v))}
-  generatePopulation(size){
-    this.residents=[];this.relations={};this.nextId=1;
-    const used=new Set();
-    for(let i=0;i<size;i++){
-      let name;
-      do{name=this.pick(DATA.firstNames)+" "+this.pick(DATA.surnames)}while(used.has(name));
-      used.add(name);
-      const mbti=this.pick(DATA.mbti), age=this.rand(18,60);
-      const traits={};
-      DATA.traits.forEach(([key])=>traits[key]=this.rand(25,75));
-      for(const letter of mbti) {
-        const effects=DATA.mbtiEffects[letter];
-        Object.entries(effects).forEach(([k,v])=>traits[k]=this.clamp(traits[k]+v));
-      }
-      const r={id:this.nextId++,name,age,sex:Math.random()<.5?"F":"M",mbti,traits,
-        state:{hunger:this.rand(15,55),energy:this.rand(45,95),mood:this.rand(45,80),stress:this.rand(5,35),social:this.rand(20,75),health:this.rand(85,100),romance:this.rand(0,35)},
-        action:"idle",location:"Praça",partner:null,memories:[],goals:[],bornDay:1,
-        map:{x:0.08+Math.random()*0.84,y:0.10+Math.random()*0.78},visualAction:null};
-      this.residents.push(r);
-      r.goals=this.makeGoals(r);
-    }
-    for(let i=0;i<this.residents.length;i++)for(let j=i+1;j<this.residents.length;j++){
-      const a=this.residents[i],b=this.residents[j],key=this.pairKey(a.id,b.id);
-      const familiarity=this.rand(0,20);
-      this.relations[key]={a:a.id,b:b.id,affinity:this.rand(-8,12),trust:this.rand(5,25),familiarity,romance:0,conflict:0,interactions:0};
-    }
-  }
-  makeGoals(r){
-    const goals=[];
-    if(r.traits.ambicao>60)goals.push("Construir uma posição de prestígio");
-    if(r.traits.necessidade_vinculo>60)goals.push("Formar vínculos próximos");
-    if(r.traits.curiosidade>65)goals.push("Conhecer melhor a vila");
-    if(r.traits.autonomia>65)goals.push("Preservar independência");
-    if(r.traits.generosidade>65)goals.push("Ajudar outros habitantes");
-    if(!goals.length)goals.push(this.pick(["Manter uma rotina estável","Conhecer pessoas novas","Desenvolver habilidades pessoais"]));
-    return goals.slice(0,2);
-  }
-  pairKey(a,b){return a<b?`${a}-${b}`:`${b}-${a}`}
-  getRelation(a,b){return this.relations[this.pairKey(a.id,b.id)]}
-  addMemory(r,text,type="event"){
-    r.memories.unshift({day:this.day,time:this.timeString(),text,type});
-    r.memories=r.memories.slice(0,12);
-  }
-  addEvent(text,type="social"){
-    this.events.unshift({day:this.day,time:this.timeString(),text,type});
-    this.events=this.events.slice(0,100);this.dailyEvents++;
-  }
-  timeString(){return `${String(this.hour).padStart(2,"0")}:${String(this.minute).padStart(2,"0")}`}
-  advanceHour(){
-    this.hour++;this.tickCount++;
-    if(this.hour>=24){this.hour=0;this.day++;this.dailyEvents=0;if(this.day%8===0)this.season=["Primavera","Verão","Outono","Inverno"][(Math.floor((this.day-1)/8))%4];}
-    this.residents.forEach(r=>this.updateResident(r));
-    if(this.tickCount%4===0)this.runSocialOpportunities();
-    if(this.tickCount%24===0)this.dailyMaintenance();
-  }
-  updateResident(r){
-    const s=r.state,t=r.traits;
-    s.hunger=this.clamp(s.hunger+this.rand(3,7));
-    s.energy=this.clamp(s.energy+(r.action==="sleep"?this.rand(12,19):-(this.rand(4,8))));
-    s.social=this.clamp(s.social-(t.necessidade_vinculo>65?5:3));
-    s.stress=this.clamp(s.stress+(s.hunger>75?4:0)+(s.energy<20?4:0)-(s.mood>70?2:0));
-    s.mood=this.clamp(s.mood+(s.health<40?-4:0)+(s.stress>75?-3:0)+(s.hunger<25?2:0));
-    if(s.hunger>95)s.health=this.clamp(s.health-3);
-    if(s.energy<5)s.health=this.clamp(s.health-2);
-    const action=this.chooseAction(r);
-    this.performAction(r,action);
-  }
-  chooseAction(r){
-    const s=r.state,t=r.traits;
-    const scores={
-      eat:s.hunger*1.15+(s.health<50?10:0),
-      sleep:(100-s.energy)*1.05+(this.hour>=22||this.hour<6?30:0),
-      socialize:(100-s.social)*.72+t.sociabilidade*.20+t.empatia*.10+(s.mood-50)*.10,
-      work:35+t.ambicao*.22+t.disciplina*.18+(this.hour>=8&&this.hour<=17?18:0)-s.energy*.22,
-      explore:20+t.curiosidade*.30+t.abertura_experiencias*.18+(this.hour>=9&&this.hour<=18?12:0),
-      avoid:t.reserva*.30+(s.stress*.35)+(s.social>65?-15:0)
-    };
-    if(s.hunger>82)scores.eat+=35;
-    if(s.energy<18)scores.sleep+=40;
-    if(s.social<18)scores.socialize+=25;
-    if(s.stress>70)scores.avoid+=22;
-    return Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
-  }
-  performAction(r,action){
-    r.action=action;
-    r.visualAction={type:action,until:this.tickCount+1};
-    const s=r.state;
-    if(action==="eat"){s.hunger=this.clamp(s.hunger-this.rand(28,42));s.mood=this.clamp(s.mood+2);r.location="Refeitório";}
-    else if(action==="sleep"){s.energy=this.clamp(s.energy+this.rand(10,16));s.stress=this.clamp(s.stress-3);r.location="Casa";}
-    else if(action==="work"){s.energy=this.clamp(s.energy-3);s.mood=this.clamp(s.mood+(r.traits.ambicao>60?2:-1));r.location="Oficina";}
-    else if(action==="explore"){s.energy=this.clamp(s.energy-2);s.mood=this.clamp(s.mood+(r.traits.curiosidade>60?3:1));r.location="Arredores";}
-    else if(action==="avoid"){s.stress=this.clamp(s.stress-2);r.location="Casa";}
-    else {r.location="Praça";}
-  }
-  runSocialOpportunities(){
-    const available=this.residents.filter(r=>r.action==="socialize"||r.action==="explore"||r.action==="work");
-    if(available.length<2)return;
-    const a=this.pick(available), candidates=available.filter(x=>x.id!==a.id);
-    if(!candidates.length)return;
-    const b=this.pick(candidates), rel=this.getRelation(a,b);
-    if(!rel)return;
-    const compatibility=this.compatibility(a,b);
-    const hostility=(a.traits.agressividade+b.traits.agressividade)/2;
-    const friendlyScore=(a.traits.empatia+b.traits.empatia)/2+(a.traits.cooperatividade+b.traits.cooperatividade)/2+compatibility;
-    const hostile=Math.random()<(hostility>68&&rel.affinity<0?.32:.08);
-    rel.interactions++;rel.familiarity=this.clamp(rel.familiarity+4);
-    if(hostile){
-      const impact=this.rand(5,12);rel.affinity=this.clamp(rel.affinity-impact,-100,100);rel.trust=this.clamp(rel.trust-impact,-100,100);rel.conflict=this.clamp(rel.conflict+impact);
-      a.state.stress=this.clamp(a.state.stress+5);b.state.stress=this.clamp(b.state.stress+5);
-      this.addMemory(a,`Teve um conflito com ${b.name}.`,"negative");this.addMemory(b,`Teve um conflito com ${a.name}.`,"negative");
-      this.addEvent(`${a.name} e ${b.name} tiveram uma interação hostil.`,"negative");
-      this.lastMapEvent={type:"conflict",a:a.id,b:b.id,at:this.tickCount,until:this.tickCount+3};
-    }else{
-      const impact=this.rand(2,6)+Math.max(0,friendlyScore/35);
-      rel.affinity=this.clamp(rel.affinity+impact,-100,100);rel.trust=this.clamp(rel.trust+impact*.65,-100,100);rel.conflict=this.clamp(rel.conflict-2);
-      a.state.social=this.clamp(a.state.social+this.rand(8,15));b.state.social=this.clamp(b.state.social+this.rand(8,15));
-      a.state.mood=this.clamp(a.state.mood+2);b.state.mood=this.clamp(b.state.mood+2);
-      this.addMemory(a,`Conversou socialmente com ${b.name}.`,"positive");this.addMemory(b,`Interagiu com ${a.name}.`,"positive");
-      this.lastMapEvent={type:"social",a:a.id,b:b.id,at:this.tickCount,until:this.tickCount+3};
-      if(rel.interactions===1||rel.interactions%5===0)this.addEvent(`${a.name} e ${b.name} tiveram uma interação amigável.`,"positive");
-    }
-  }
-  compatibility(a,b){
-    const dimensions=["sociabilidade","curiosidade","empatia","planejamento","assertividade"];
-    return dimensions.reduce((sum,k)=>sum+100-Math.abs(a.traits[k]-b.traits[k]),0)/dimensions.length/10;
-  }
-  dailyMaintenance(){
-    this.residents.forEach(r=>{
-      if(r.age<60&&r.age>=18&&r.state.health>70&&r.partner===null&&r.traits.necessidade_vinculo>75&&r.traits.romantismo>75){
-        const candidates=this.residents.filter(x=>x.id!==r.id&&x.partner===null&&x.age>=18&&x.age<60&&x.sex!==r.sex&&this.getRelation(r,x)?.affinity>55);
-        if(candidates.length&&Math.random()<.025){
-          const p=this.pick(candidates),rel=this.getRelation(r,p);
-          r.partner=p.id;p.partner=r.id;rel.romance=this.clamp(rel.romance+20);
-          this.addEvent(`${r.name} e ${p.name} iniciaram um relacionamento.`,"positive");
-          this.addMemory(r,`Iniciou um relacionamento com ${p.name}.`);this.addMemory(p,`Iniciou um relacionamento com ${r.name}.`);
-        }
-      }
-      if(r.age<60&&r.age>=18&&r.partner!==null&&Math.random()<.006&&this.residents.length<80){
-        const partner=this.residents.find(x=>x.id===r.partner);
-        if(partner&&r.sex==="F"){
-          const child={id:this.nextId++,name:this.pick(DATA.firstNames)+" "+r.name.split(" ").slice(-1)[0],age:0,sex:Math.random()<.5?"F":"M",mbti:this.pick(DATA.mbti),traits:{...r.traits},state:{hunger:20,energy:80,mood:70,stress:5,social:10,health:100,romance:0},action:"idle",location:"Casa",partner:null,memories:[],goals:["Crescer e desenvolver vínculos"],bornDay:this.day,map:{x:0.08+Math.random()*0.84,y:0.10+Math.random()*0.78},visualAction:null};
-          this.residents.push(child);
-          this.addEvent(`${r.name} e ${partner.name} tiveram um filho: ${child.name}.`,"positive");
-        }
-      }
-    });
-  }
-  wellbeing(){if(!this.residents.length)return 0;return Math.round(this.residents.reduce((v,r)=>v+(r.state.mood+r.state.health+(100-r.state.stress))/3,0)/this.residents.length)}
-  positiveRelations(){return Object.values(this.relations).filter(r=>r.affinity>20).length}
-  residentById(id){return this.residents.find(r=>r.id===id)}
-}
+const clamp=(v,a=0,b=100)=>Math.max(a,Math.min(b,v)),R=Math.random,pick=a=>a[Math.floor(R()*a.length)],gauss=()=>(R()+R()+R())/3*100;
+const Sim={agents:[],t:0,food:100,log:[],links:[],
+ place(k){return WORLD.places.find(p=>p.k===k)},
+ make(id,name){const m=pick(MBTI),t={};TRAITS.forEach(k=>t[k]=gauss());
+  for(const l of m)if(BIAS[l])for(const k in BIAS[l])t[k]+=BIAS[l][k];TRAITS.forEach(k=>t[k]=Math.round(clamp(t[k])));
+  const g=GOALS.map(([n,k])=>[n,t[k]+R()*40]).sort((a,b)=>b[1]-a[1])[0][0];
+  return{id,name,age:18+Math.floor(R()*50),mbti:m,t,goal:g,x:R()*WORLD.w,y:R()*WORLD.h,home:{x:380+R()*200,y:480+R()*90},
+   s:{fome:R()*50,energia:60+R()*40,humor:50+(t.otimismo-t.pessimismo)/4,estresse:R()*30,solidao:R()*40,satisfacao:50},
+   act:"descansar",timer:0,tgt:null,cd:0,rel:{},mem:[],work:0}},
+ init(n=14){this.agents=[];this.t=0;this.food=100;this.log=[];const ns=[...NAMES].sort(()=>R()-.5);for(let i=0;i<n;i++)this.agents.push(this.make(i,ns[i]));
+  this.agents.forEach(a=>this.pushLog(a.name+" chegou à comunidade."))},
+ pushLog(x){this.log.unshift(`[${this.clock()}] ${x}`);this.log.length=Math.min(this.log.length,80)},
+ clock(){const m=this.t%1440;return`Dia ${Math.floor(this.t/1440)+1} ${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`},
+ hour(){return Math.floor(this.t%1440/60)},
+ rel(a,b){return a.rel[b.id]||(a.rel[b.id]={afinidade:50,confianca:a.t.confianca_inicial*.6,familiaridade:0,respeito:50,atracao:R()*45*a.t.romantismo/60,ressentimento:0,conflito:0})},
+ memScore(a,b){return a.mem.filter(m=>m.w===b.id).reduce((s,m)=>s+m.val*m.int,0)},
+ remember(a,b,txt,val,int){a.mem.unshift({txt,w:b.id,val,int,t:this.t});if(a.mem.length>30)a.mem.pop()},
+ pickPartner(a){let best=null,bs=-1e9;for(const b of this.agents){if(b===a)continue;const r=this.rel(a,b),d=Math.hypot(a.x-b.x,a.y-b.y);
+  const sc=r.afinidade*.5+r.familiaridade*.3+r.confianca*.2-r.ressentimento*.6-r.conflito*.4+this.memScore(a,b)*20-d*.05+R()*25;if(sc>bs){bs=sc;best=b}}return best},
+ utilities(a){const t=a.t,s=a.s,n=x=>x/100,h=this.hour(),day=h>=7&&h<19,o={},g=a.goal;
+  o.comer=this.food>0?n(s.fome)**1.5*1.5:0;
+  o.dormir=n(100-s.energia)**1.5*1.3+(h>=22||h<6?.4:0);
+  o.trabalhar=day?n(t.ambicao)*.3+n(t.disciplina)*.2+(g[0]=="A"?.15:0)-n(s.estresse)*.2-n(100-s.energia)*.2:-1;
+  o.socializar=n(s.solidao)*.5+n(t.sociabilidade)*.35-n(t.timidez)*.2+n(s.humor)*.1-n(t.ansiedade)*n(s.estresse)*.3+(g[0]=="F"||g[0]=="E"?.15:0)-(h<6?.5:0);
+  o.descansar=n(s.estresse)*.5+n(100-s.energia)*.3;
+  o.explorar=n(t.curiosidade)*.3+n(t.abertura)*.15-n(t.aversao_risco)*.15+(g[0]=="C"?.15:0)-n(100-s.energia)*.2;
+  let worst=0;this.agents.forEach(b=>{if(b!==a)worst=Math.max(worst,this.rel(a,b).conflito+this.rel(a,b).ressentimento)});
+  o.evitar=n(s.estresse)*.3+n(t.ansiedade)*.15+n(worst)*.4-.15;
+  for(const k in o)o[k]+=R()*.12;return o},
+ choose(a){const u=this.utilities(a);let best=a.act,bv=-9;for(const k in u)if(u[k]>bv){bv=u[k];best=k}
+  if(best!==a.act){a.act=best;a.tgt=null}a.timer=30+R()*60;
+  if(best==="socializar")a.tgt=this.pickPartner(a);
+  if(best==="explorar")a.dest={x:R()*WORLD.w,y:R()*WORLD.h};
+  if(best==="evitar"){let w=null,v=-1;this.agents.forEach(b=>{if(b!==a){const r=this.rel(a,b),x=r.conflito+r.ressentimento;if(x>v){v=x;w=b}}});a.dest=w?{x:clamp(a.x*2-w.x,0,WORLD.w),y:clamp(a.y*2-w.y,0,WORLD.h)}:{x:R()*WORLD.w,y:R()*WORLD.h}}},
+ dest(a){const k={comer:"food",trabalhar:"work",dormir:"home"}[a.act];
+  if(a.act==="dormir")return a.home;if(k)return this.place(k);if(a.act==="socializar"&&a.tgt)return a.tgt;
+  if(a.act==="explorar"||a.act==="evitar")return a.dest;return null},
+ interact(a,b){const r=this.rel(a,b),q=this.rel(b,a),ta=a.t,tb=b.t;let kind="amigavel";
+  if(r.atracao>45&&R()<.25&&a.age>=18&&b.age>=18)kind="romance";
+  else if(R()<ta.agressividade/100*.2+r.conflito/300+r.ressentimento/400)kind="provocar";
+  const sc=((q.afinidade-50)/100+q.confianca/300+(tb.tolerancia-50)/150-q.ressentimento/200+(b.s.humor-50)/200-tb.irritabilidade*.003+(R()-.5)*.4);
+  let ok,col,txt;
+  if(kind==="amigavel"){ok=sc>-.05;col="#6c6";txt=ok?`${a.name} conversou amistosamente com ${b.name}.`:`${b.name} reagiu com frieza a ${a.name}.`}
+  else if(kind==="provocar"){ok=sc>.25;col="#e55";txt=ok?`${b.name} levou a provocação de ${a.name} na brincadeira.`:`${a.name} provocou ${b.name}, que se ofendeu.`}
+  else{ok=q.atracao/100+q.afinidade/200+sc>.55;col="#e8a";txt=ok?`${a.name} demonstrou interesse e ${b.name} correspondeu.`:`${a.name} demonstrou interesse e ${b.name} recusou.`}
+  const sa=1+ta.sensibilidade/200,sb=1+tb.sensibilidade/200;
+  r.familiaridade=clamp(r.familiaridade+2);q.familiaridade=clamp(q.familiaridade+2);
+  if(kind==="amigavel"){const d=ok?3:-2;r.afinidade=clamp(r.afinidade+d);q.afinidade=clamp(q.afinidade+d*sb);if(ok){r.confianca=clamp(r.confianca+1.5);q.confianca=clamp(q.confianca+1.5);a.s.solidao=clamp(a.s.solidao-12);b.s.solidao=clamp(b.s.solidao-12);a.s.humor=clamp(a.s.humor+3);b.s.humor=clamp(b.s.humor+3)}else{r.ressentimento=clamp(r.ressentimento+1);a.s.humor=clamp(a.s.humor-2*sa)}}
+  else if(kind==="provocar"){if(ok){q.afinidade=clamp(q.afinidade+1);r.afinidade=clamp(r.afinidade+1)}else{q.afinidade=clamp(q.afinidade-6*sb);q.ressentimento=clamp(q.ressentimento+8*sb);q.conflito=clamp(q.conflito+10*sb);r.conflito=clamp(r.conflito+5);b.s.humor=clamp(b.s.humor-6*sb);b.s.estresse=clamp(b.s.estresse+8*sb);a.s.estresse=clamp(a.s.estresse+2)}}
+  else{if(ok){r.atracao=clamp(r.atracao+6);q.atracao=clamp(q.atracao+8);r.afinidade=clamp(r.afinidade+4);q.afinidade=clamp(q.afinidade+4);a.s.humor=clamp(a.s.humor+8);b.s.humor=clamp(b.s.humor+6)}else{r.atracao=clamp(r.atracao-3);a.s.humor=clamp(a.s.humor-8*sa);a.s.estresse=clamp(a.s.estresse+5)}}
+  const bad=kind==="provocar"&&!ok||kind!=="provocar"&&!ok,v=bad?-1:1;
+  this.remember(a,b,txt,v,.4+R()*.3);this.remember(b,a,txt,v,.4+R()*.3);this.pushLog(txt);this.links.push({a,b,col,ttl:40});a.cd=60;b.cd=30},
+ step(){this.t++;const rec=this.t%120===0;
+  for(const a of this.agents){const s=a.s,t=a.t;
+   s.fome=clamp(s.fome+.07);s.energia=clamp(s.energia-.04);s.solidao=clamp(s.solidao+.03*(t.sociabilidade/50)*(1-t.independencia/200));
+   s.estresse=clamp(s.estresse-.01*(t.resiliencia/50)+(s.fome>80?.04:0));
+   s.humor=clamp(s.humor+((50+(t.otimismo-t.pessimismo)/4-s.humor)*.002)-(s.fome>80?.04:0)-(s.solidao>80?.02:0));
+   s.satisfacao=clamp(s.satisfacao+((s.humor*.5+(100-s.solidao)*.2+(100-s.fome)*.15+(100-s.estresse)*.15)-s.satisfacao)*.01);
+   if(a.cd>0)a.cd--;a.timer--;
+   if(a.timer<=0||(s.fome>92&&a.act!=="comer"&&this.food>0)||(s.energia<8&&a.act!=="dormir"))this.choose(a);
+   const d=this.dest(a);
+   if(d){const dx=d.x-a.x,dy=d.y-a.y,dist=Math.hypot(dx,dy),sp=a.act==="explorar"?1:1.4;
+    if(dist>12){a.x+=dx/dist*sp;a.y+=dy/dist*sp}
+    else{const at=a.act;
+     if(at==="comer"){if(this.food>0){s.fome=clamp(s.fome-3);this.food-=.05;if(s.fome<10)a.timer=0}else a.timer=0}
+     else if(at==="dormir"){s.energia=clamp(s.energia+.9);if(s.energia>95&&this.hour()>=6)a.timer=0}
+     else if(at==="trabalhar"){s.energia=clamp(s.energia-.08);s.estresse=clamp(s.estresse+.02);s.satisfacao=clamp(s.satisfacao+.03);this.food+=.012}
+     else if(at==="socializar"&&a.tgt&&a.cd===0&&a.tgt.cd<30&&["socializar","descansar","explorar"].includes(a.tgt.act)||at==="socializar"&&a.tgt&&a.cd===0&&a.tgt.cd<30){this.interact(a,a.tgt);a.timer=Math.min(a.timer,25)}
+     else if(at==="explorar"||at==="evitar"){a.timer=Math.min(a.timer,5)}}}
+   if(a.act==="descansar"){s.energia=clamp(s.energia+.3);s.estresse=clamp(s.estresse-.12)}
+   if(rec)for(const m of a.mem)m.int*=m.int>.7?.995:.97;
+   if(rec)a.mem=a.mem.filter(m=>m.int>.05)}
+  this.food=Math.min(this.food+.02,150);
+  this.links=this.links.filter(l=>--l.ttl>0)},
+ save(){localStorage.setItem("matrix",JSON.stringify({agents:this.agents,t:this.t,food:this.food,log:this.log}))},
+ load(){const d=JSON.parse(localStorage.getItem("matrix")||"null");if(!d)return false;
+  Object.assign(this,{agents:d.agents,t:d.t,food:d.food,log:d.log,links:[]});
+  this.agents.forEach(a=>a.tgt=null);return true}};

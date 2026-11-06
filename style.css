@@ -1,0 +1,8 @@
+*{box-sizing:border-box}body{margin:0;background:#000;color:#ddd;font:13px/1.45 system-ui,sans-serif}
+header{display:flex;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px solid #222}header b{font-size:16px;margin-right:8px;color:#fff}
+button,select{background:#111;color:#ddd;border:1px solid #333;padding:4px 10px;border-radius:3px;cursor:pointer}button:hover{border-color:#888}#clock{margin-left:auto;color:#888}
+main{display:flex;flex-wrap:wrap}canvas{background:#000;max-width:100%;height:auto;flex:1 1 640px;cursor:crosshair}
+aside{flex:1 1 300px;max-width:420px;padding:10px 12px;border-left:1px solid #222;height:calc(100vh - 45px);overflow:auto}
+h3{margin:14px 0 4px;font-size:13px;color:#fff}.bar{display:flex;align-items:center;gap:6px}.bar i{display:block;height:5px;background:#fff;opacity:.8}.bar span{width:70px;color:#888}
+.bar div{flex:1;background:#1a1a1a}.tr{columns:2;color:#999;font-size:12px}.m{color:#888}.pos{color:#6c6}.neg{color:#e66}.rom{color:#e8a}
+#log div{border-bottom:1px solid #151515;padding:2px 0;color:#aaa}details summary{cursor:pointer;color:#fff}
